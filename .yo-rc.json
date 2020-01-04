@@ -1,0 +1,65 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "es.pmg.pedidos"
+    },
+    "jhipsterVersion": "6.6.0",
+    "applicationType": "monolith",
+    "baseName": "pedidos",
+    "packageName": "es.pmg.pedidos",
+    "packageFolder": "es/pmg/pedidos",
+    "serverPort": "8080",
+    "authenticationType": "session",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "h2Disk",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "rememberMeKey": "d3530738603d6748918570134e0b1fdfc2571496aac26dd4e7716c028549c55b14205820de9cc16c78e8b46a64ba91eab2dc",
+    "embeddableLaunchScript": false,
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "clientFramework": "angularX",
+    "clientTheme": "none",
+    "clientThemeVariant": "",
+    "creationTimestamp": 1578157417486,
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [
+      {
+        "name": "generator-jhipster-primeng",
+        "version": "3.0.0"
+      },
+      {
+        "name": "generator-jhipster-primeng-charts",
+        "version": "1.2.0"
+      },
+      {
+        "name": "generator-jhipster-stripe-payment",
+        "version": "1.0.9"
+      },
+      {
+        "name": "generator-jhipster-paypal",
+        "version": "1.0.5"
+      },
+      {
+        "name": "generator-jhipster-administration-database",
+        "version": "1.0.4"
+      },
+      {
+        "name": "generator-jhipster-kutilang",
+        "version": "0.0.9"
+      }
+    ],
+    "enableTranslation": false,
+    "blueprints": []
+  }
+}
