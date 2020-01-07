@@ -1,0 +1,77 @@
+<div>
+    <h2 id="page-heading">
+        <span>Direccions</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-direccion" [routerLink]="['/direccion/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create a new Direccion
+            </span>
+        </button>
+    </h2>
+    <jhi-alert-error></jhi-alert-error>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="direccions?.length === 0">
+        <span>No direccions found</span>
+    </div>
+    <div class="table-responsive" *ngIf="direccions?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
+            <th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="nombreVia"><span>Nombre Via</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="numero"><span>Numero</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="piso"><span>Piso</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="bloque"><span>Bloque</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="puerta"><span>Puerta</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="escalera"><span>Escalera</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="usuario.id"><span>Usuario</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="localidad.id"><span>Localidad</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tr *ngFor="let direccion of direccions ;trackBy: trackId">
+                <td><a [routerLink]="['/direccion', direccion.id, 'view' ]">{{direccion.id}}</a></td>
+                <td>{{direccion.nombreVia}}</td>
+                <td>{{direccion.numero}}</td>
+                <td>{{direccion.piso}}</td>
+                <td>{{direccion.bloque}}</td>
+                <td>{{direccion.puerta}}</td>
+                <td>{{direccion.escalera}}</td>
+                <td>
+                    <div *ngIf="direccion.usuario">
+                        <a [routerLink]="['/cliente', direccion.usuario?.id, 'view' ]" >{{direccion.usuario?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="direccion.localidad">
+                        <a [routerLink]="['/localidad', direccion.localidad?.id, 'view' ]" >{{direccion.localidad?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/direccion', direccion.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/direccion', direccion.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit" (click)="delete(direccion)"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

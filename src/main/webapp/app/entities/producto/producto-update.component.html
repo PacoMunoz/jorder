@@ -1,0 +1,96 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-producto-heading">Create or edit a Producto</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_codigo">Codigo</label>
+                    <input type="text" class="form-control" name="codigo" id="field_codigo"
+                           formControlName="codigo"/>
+                    <div *ngIf="editForm.get('codigo')!.invalid && (editForm.get('codigo')!.dirty || editForm.get('codigo')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('codigo')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('codigo')?.errors?.minlength">
+                        This field is required to be at least 4 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('codigo')?.errors?.maxlength">
+                        This field cannot be longer than 8 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_descripcion">Descripcion</label>
+                    <input type="text" class="form-control" name="descripcion" id="field_descripcion"
+                           formControlName="descripcion"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_precio">Precio</label>
+                    <input type="number" class="form-control" name="precio" id="field_precio"
+                           formControlName="precio"/>
+                    <div *ngIf="editForm.get('precio')!.invalid && (editForm.get('precio')!.dirty || editForm.get('precio')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('precio')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('precio')?.errors?.min">
+                            This field should be at least 0.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('precio')?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_imagen">Imagen</label>
+                    <div>
+                        <img [src]="'data:' + editForm.get('imagenContentType')!.value + ';base64,' + editForm.get('imagen')!.value" style="max-height: 100px;" *ngIf="editForm.get('imagen')!.value" alt="producto image"/>
+                        <div *ngIf="editForm.get('imagen')!.value" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{editForm.get('imagenContentType')!.value}}, {{byteSize(editForm.get('imagen')!.value)}}</span>
+                            <button type="button" (click)="clearInputImage('imagen', 'imagenContentType', 'file_imagen')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_imagen" (change)="setFileData($event, 'imagen', true)" accept="image/*"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="imagen" id="field_imagen"
+                           formControlName="imagen"/>
+                    <input type="hidden" class="form-control" name="imagenContentType" id="field_imagenContentType"
+                           formControlName="imagenContentType" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_disponible">Disponible</label>
+                    <input type="checkbox" class="form-control" name="disponible" id="field_disponible"
+                           formControlName="disponible"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_familia">Familia</label>
+                    <select class="form-control" id="field_familia" name="familia" formControlName="familia">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="familiaOption.id === editForm.get('familia')!.value?.id ? editForm.get('familia')!.value : familiaOption" *ngFor="let familiaOption of familias; trackBy: trackById">{{familiaOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

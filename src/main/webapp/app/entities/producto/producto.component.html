@@ -1,0 +1,74 @@
+<div>
+    <h2 id="page-heading">
+        <span>Productos</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-producto" [routerLink]="['/producto/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create a new Producto
+            </span>
+        </button>
+    </h2>
+    <jhi-alert-error></jhi-alert-error>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="productos?.length === 0">
+        <span>No productos found</span>
+    </div>
+    <div class="table-responsive" *ngIf="productos?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
+            <th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="codigo"><span>Codigo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="descripcion"><span>Descripcion</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="precio"><span>Precio</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="imagen"><span>Imagen</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="disponible"><span>Disponible</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="familia.id"><span>Familia</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tr *ngFor="let producto of productos ;trackBy: trackId">
+                <td><a [routerLink]="['/producto', producto.id, 'view' ]">{{producto.id}}</a></td>
+                <td>{{producto.codigo}}</td>
+                <td>{{producto.descripcion}}</td>
+                <td>{{producto.precio}}</td>
+                <td>
+                    <a *ngIf="producto.imagen" (click)="openFile(producto.imagenContentType, producto.imagen)">
+                        <img [src]="'data:' + producto.imagenContentType + ';base64,' + producto.imagen" style="max-height: 30px;" alt="producto image"/>
+                    </a>
+                    <span *ngIf="producto.imagen">{{producto.imagenContentType}}, {{byteSize(producto.imagen)}}</span>
+                </td>
+                <td>{{producto.disponible}}</td>
+                <td>
+                    <div *ngIf="producto.familia">
+                        <a [routerLink]="['/familia', producto.familia?.id, 'view' ]" >{{producto.familia?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/producto', producto.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/producto', producto.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit" (click)="delete(producto)"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

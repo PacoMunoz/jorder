@@ -1,0 +1,58 @@
+{
+    "name": "Direccion",
+    "fields": [
+        {
+            "fieldName": "nombreVia",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "numero",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "piso",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "bloque",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "puerta",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "escalera",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "cliente",
+            "otherEntityRelationshipName": "direccion",
+            "relationshipName": "usuario",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "localidad",
+            "otherEntityRelationshipName": "direccion",
+            "relationshipName": "localidad",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200104170840",
+    "entityTableName": "direccion",
+    "dto": "no",
+    "pagination": "infinite-scroll",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

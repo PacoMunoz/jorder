@@ -1,0 +1,54 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="producto">
+            <h2><span>Producto</span> {{producto.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Codigo</span></dt>
+                <dd>
+                    <span>{{producto.codigo}}</span>
+                </dd>
+                <dt><span>Descripcion</span></dt>
+                <dd>
+                    <span>{{producto.descripcion}}</span>
+                </dd>
+                <dt><span>Precio</span></dt>
+                <dd>
+                    <span>{{producto.precio}}</span>
+                </dd>
+                <dt><span>Imagen</span></dt>
+                <dd>
+                    <div *ngIf="producto.imagen">
+                        <a (click)="openFile(producto.imagenContentType!, producto.imagen)">
+                            <img [src]="'data:' + producto.imagenContentType + ';base64,' + producto.imagen" style="max-width: 100%;" alt="producto image"/>
+                        </a>
+                        {{producto.imagenContentType}}, {{byteSize(producto.imagen)}}
+                    </div>
+                </dd>
+                <dt><span>Disponible</span></dt>
+                <dd>
+                    <span>{{producto.disponible}}</span>
+                </dd>
+                <dt><span>Familia</span></dt>
+                <dd>
+                    <div *ngIf="producto.familia">
+                        <a [routerLink]="['/familia', producto.familia?.id, 'view']">{{producto.familia?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/producto', producto.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

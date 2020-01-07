@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity Pedido.
+    -->
+    <changeSet id="20200104170843-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="direccion_id"
+                                 baseTableName="pedido"
+                                 constraintName="fk_pedido_direccion_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="direccion"/>
+
+        <addForeignKeyConstraint baseColumnNames="cliente_id"
+                                 baseTableName="pedido"
+                                 constraintName="fk_pedido_cliente_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="cliente"/>
+
+        <addForeignKeyConstraint baseColumnNames="forma_pago_id"
+                                 baseTableName="pedido"
+                                 constraintName="fk_pedido_forma_pago_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="forma_pago"/>
+
+        <addForeignKeyConstraint baseColumnNames="estado_pedido_id"
+                                 baseTableName="pedido"
+                                 constraintName="fk_pedido_estado_pedido_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="estado_pedido"/>
+
+    </changeSet>
+</databaseChangeLog>

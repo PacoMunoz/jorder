@@ -1,0 +1,59 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="pedido">
+            <h2><span>Pedido</span> {{pedido.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Codigo</span></dt>
+                <dd>
+                    <span>{{pedido.codigo}}</span>
+                </dd>
+                <dt><span>A Domicilio</span></dt>
+                <dd>
+                    <span>{{pedido.aDomicilio}}</span>
+                </dd>
+                <dt><span>Fecha Pedido</span></dt>
+                <dd>
+                    <span>{{pedido.fechaPedido}}</span>
+                </dd>
+                <dt><span>Direccion</span></dt>
+                <dd>
+                    <div *ngIf="pedido.direccion">
+                        <a [routerLink]="['/direccion', pedido.direccion?.id, 'view']">{{pedido.direccion?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Cliente</span></dt>
+                <dd>
+                    <div *ngIf="pedido.cliente">
+                        <a [routerLink]="['/cliente', pedido.cliente?.id, 'view']">{{pedido.cliente?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Forma Pago</span></dt>
+                <dd>
+                    <div *ngIf="pedido.formaPago">
+                        <a [routerLink]="['/forma-pago', pedido.formaPago?.id, 'view']">{{pedido.formaPago?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Estado Pedido</span></dt>
+                <dd>
+                    <div *ngIf="pedido.estadoPedido">
+                        <a [routerLink]="['/estado-pedido', pedido.estadoPedido?.id, 'view']">{{pedido.estadoPedido?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/pedido', pedido.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

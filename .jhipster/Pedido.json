@@ -1,0 +1,68 @@
+{
+    "name": "Pedido",
+    "fields": [
+        {
+            "fieldName": "codigo",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength",
+                "minlength"
+            ],
+            "fieldValidateRulesMaxlength": 8,
+            "fieldValidateRulesMinlength": 4
+        },
+        {
+            "fieldName": "aDomicilio",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "fechaPedido",
+            "fieldType": "Instant",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "direccion",
+            "otherEntityRelationshipName": "pedido",
+            "relationshipName": "direccion",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "cliente",
+            "otherEntityRelationshipName": "pedido",
+            "relationshipName": "cliente",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "formaPago",
+            "otherEntityRelationshipName": "pedido",
+            "relationshipName": "formaPago",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "estadoPedido",
+            "otherEntityRelationshipName": "pedido",
+            "relationshipName": "estadoPedido",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200104170843",
+    "entityTableName": "pedido",
+    "dto": "no",
+    "pagination": "infinite-scroll",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

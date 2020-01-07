@@ -1,0 +1,38 @@
+{
+    "name": "LineaPedido",
+    "fields": [
+        {
+            "fieldName": "cantidad",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "pedido",
+            "otherEntityRelationshipName": "lineaPedido",
+            "relationshipName": "pedido",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "producto",
+            "otherEntityRelationshipName": "lineaPedido",
+            "relationshipName": "producto",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200104170845",
+    "entityTableName": "linea_pedido",
+    "dto": "no",
+    "pagination": "infinite-scroll",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}
