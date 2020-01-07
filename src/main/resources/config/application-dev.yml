@@ -63,7 +63,7 @@ spring:
     host: smtp.jtenis.es
     port: 587
     username: gestion@jtenis.es
-    password: xTqwUFhZM4EgDtu
+    password:
     protocol: smtp
     #tls: true
     properties.mail.smtp:
