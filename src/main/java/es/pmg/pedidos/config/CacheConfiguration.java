@@ -44,6 +44,15 @@ public class CacheConfiguration {
             createCache(cm, es.pmg.pedidos.domain.User.class.getName() + ".authorities");
             createCache(cm, es.pmg.pedidos.domain.PersistentToken.class.getName());
             createCache(cm, es.pmg.pedidos.domain.User.class.getName() + ".persistentTokens");
+            createCache(cm, es.pmg.pedidos.domain.Cliente.class.getName());
+            createCache(cm, es.pmg.pedidos.domain.Direccion.class.getName());
+            createCache(cm, es.pmg.pedidos.domain.Localidad.class.getName());
+            createCache(cm, es.pmg.pedidos.domain.FormaPago.class.getName());
+            createCache(cm, es.pmg.pedidos.domain.Pedido.class.getName());
+            createCache(cm, es.pmg.pedidos.domain.EstadoPedido.class.getName());
+            createCache(cm, es.pmg.pedidos.domain.LineaPedido.class.getName());
+            createCache(cm, es.pmg.pedidos.domain.Producto.class.getName());
+            createCache(cm, es.pmg.pedidos.domain.Familia.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

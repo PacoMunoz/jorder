@@ -131,7 +131,7 @@ jhipster:
   #     allow-credentials: true
   #     max-age: 1800
   mail:
-    from: pedidos@localhost
+    from: gestion@jtenis.es
   swagger:
     default-include-pattern: /api/.*
     title: pedidos API
