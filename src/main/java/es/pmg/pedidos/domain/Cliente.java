@@ -32,8 +32,7 @@ public class Cliente implements Serializable {
     @Column(name = "dni")
     private String dni;
 
-    @OneToOne(optional = false)
-    @NotNull
+    @OneToOne
     @JoinColumn(unique = true)
     private User user;
 

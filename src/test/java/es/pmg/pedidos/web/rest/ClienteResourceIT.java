@@ -97,11 +97,6 @@ public class ClienteResourceIT {
             .nombre(DEFAULT_NOMBRE)
             .apellido(DEFAULT_APELLIDO)
             .dni(DEFAULT_DNI);
-        // Add required entity
-        User user = UserResourceIT.createEntity(em);
-        em.persist(user);
-        em.flush();
-        cliente.setUser(user);
         return cliente;
     }
     /**
@@ -115,11 +110,6 @@ public class ClienteResourceIT {
             .nombre(UPDATED_NOMBRE)
             .apellido(UPDATED_APELLIDO)
             .dni(UPDATED_DNI);
-        // Add required entity
-        User user = UserResourceIT.createEntity(em);
-        em.persist(user);
-        em.flush();
-        cliente.setUser(user);
         return cliente;
     }
 
@@ -493,8 +483,12 @@ public class ClienteResourceIT {
     @Test
     @Transactional
     public void getAllClientesByUserIsEqualToSomething() throws Exception {
-        // Get already existing entity
-        User user = cliente.getUser();
+        // Initialize the database
+        clienteRepository.saveAndFlush(cliente);
+        User user = UserResourceIT.createEntity(em);
+        em.persist(user);
+        em.flush();
+        cliente.setUser(user);
         clienteRepository.saveAndFlush(cliente);
         Long userId = user.getId();
 

@@ -55,7 +55,7 @@ entity Familia {
 
 relationship OneToOne {
 	Pedido{direccion} to Direccion
-    Cliente{user(login) required} to User
+    Cliente{user(login)} to User
 }
 
 

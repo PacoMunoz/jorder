@@ -25,7 +25,7 @@ export class ClienteUpdateComponent implements OnInit {
     nombre: [null, [Validators.required]],
     apellido: [null, [Validators.required]],
     dni: [],
-    user: [null, Validators.required]
+    user: []
   });
 
   constructor(
