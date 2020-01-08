@@ -1,0 +1,87 @@
+
+entity Cliente {
+	nombre String required,
+    apellido String required,
+    dni String
+}
+
+entity Direccion {
+	nombreVia String required,
+    numero Integer,
+    piso String,
+    bloque String,
+    Puerta String,
+    Escalera String
+}
+
+entity Localidad {
+ 	codigo String required maxlength(8) minlength(4),
+    nombre String required,
+    codigoPostal Integer required
+}
+
+entity FormaPago {
+	codigo String required maxlength(8) minlength(4),
+    descripcion String required
+}
+
+entity Pedido {
+	codigo String required maxlength(8) minlength(4),
+	aDomicilio Boolean,
+    fechaPedido Instant required
+}
+
+entity EstadoPedido {
+	codigo String required maxlength(8) minlength(4),
+    descripcion String required
+}
+
+entity LineaPedido {
+	cantidad Integer required
+}
+
+entity Producto {
+	codigo String required maxlength(8) minlength(4),
+    descripcion String,
+    precio BigDecimal required min(0),
+    imagen ImageBlob,
+    disponible Boolean
+}
+
+entity Familia {
+	codigo String required maxlength(8) minlength(4),
+    descripcion String
+}
+
+relationship OneToOne {
+	Pedido{direccion} to Direccion
+    Cliente{user(login) required} to User
+}
+
+
+
+relationship ManyToOne {
+	Direccion{usuario} to Cliente,
+    Direccion{localidad} to Localidad
+    Pedido{cliente} to Cliente,
+    Pedido{formaPago} to FormaPago,
+    Pedido{estadoPedido} to EstadoPedido
+    LineaPedido{pedido} to Pedido,
+    LineaPedido{producto} to Producto,
+    Producto{familia} to Familia
+}
+
+// Set pagination options
+paginate all with infinite-scroll
+
+// Use Data Transfert Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all
+service all with serviceClass
+
+// Set an angular suffix
+// angularSuffix * with mySuffix
+
+filter all
+
